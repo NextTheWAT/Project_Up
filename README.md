@@ -64,7 +64,7 @@ Scenes 폴더의 메인 씬 실행
 
 ```plaintext
 Assets/
-├── 01.Scripts/
+├── 02.Scripts/
 │   ├── Character/
 │   │   ├── CharacterManager.cs
 │   │   ├── Player.cs
@@ -93,7 +93,5 @@ Assets/
 │   │
 │   └── Sound/
 │       └── FootSteps.cs
-'''
-
 
 
