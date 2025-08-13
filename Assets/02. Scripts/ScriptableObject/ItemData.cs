@@ -5,7 +5,6 @@ using System;
 
 public enum ItemType
 {
-    Equipable,
     Consumable,
     Environment, // 환경 오브젝트
 }

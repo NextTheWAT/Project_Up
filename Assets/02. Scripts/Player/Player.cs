@@ -7,7 +7,6 @@ public class Player : MonoBehaviour
 {
     public PlayerController controller;
     public PlayerCondition condition;
-    public Equipment equip; // 플레이어가 착용한 장비를 관리하는 컴포넌트
 
     public ItemData itemData;
     public Action addItem;
@@ -21,7 +20,6 @@ public class Player : MonoBehaviour
         CharacterManager.Instance.Player = this;
         controller = GetComponent<PlayerController>();
         condition = GetComponent<PlayerCondition>();
-        equip = GetComponent<Equipment>();
         animator = GetComponent<Animator>();
     }
 }

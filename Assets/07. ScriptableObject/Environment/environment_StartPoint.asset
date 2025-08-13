@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   displayName: "\uC2DC\uC791\uC9C0\uC810\uC774\uB2E4."
   description: "\uC5EC\uAE30\uC11C \uB2E4\uC2DC \uD0DC\uC5B4\uB098\uB098\uBCF4\uB2E4.."
-  type: 2
+  type: 1
   icon: {fileID: 0}
   dropPrefab: {fileID: 0}
   canStack: 0
