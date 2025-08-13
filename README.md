@@ -93,5 +93,84 @@ Assets/
 │   │
 │   └── Sound/
 │       └── FootSteps.cs
+```
+
+
+# 🧯 Troubleshooting & Recommended Fixes
+
+---
+
+## 1. 스태미나 0일 때 달리기 유지되는 문제
+**문제**  
+`RunUseStamina()`에서 스태미나를 소모만 하고, 0 이하가 되어도 달리기 해제가 되지 않음.
+
+**영향**  
+스태미나 UI가 0임에도 캐릭터가 계속 달리는 것처럼 보일 수 있음.
+
+**해결 코드**
+```csharp
+// PlayerController.cs
+private void RunUseStamina()
+{
+    if (isRunning && curMovementInput.magnitude > 0.1f)
+    {
+        bool ok = CharacterManager.Instance.Player.condition
+                         .UseStamina(Time.deltaTime * staminaDrainRate);
+        if (!ok)
+        {
+            isRunning = false;
+            moveSpeed = walkSpeed;
+        }
+    }
+}
+```
+
+
+## 2. 상호작용 대상이 없어도 실행되는 문제
+**문제**   
+Interaction 스크립트에서 curInteractable이 null이어도 OnInteract()가 호출됨.  
+
+**영향**  
+상호작용 키 입력 시 UI가 깜빡이거나 NullReferenceException이 발생할 수 있음.  
+
+**해결 코드**
+```csharp
+// Interaction.cs
+public void OnInteractInput(InputAction.CallbackContext context)
+{
+    if (context.phase == InputActionPhase.Started && curInteractable != null)
+    {
+        curInteractable.OnInteract();
+        curInteractGameObject = null;
+        curInteractable = null;
+        promptText.gameObject.SetActive(false);
+    }
+}
+```
+
+## 3. 리소스 채집 시 드랍 위치가 어색한 문제
+**문제**   
+Resource 스크립트에서 드랍 아이템 생성 위치가 고정값으로 설정되어 있음.  
+
+**영향**  
+리소스 오브젝트와 무관한 위치에 아이템이 생성되어 부자연스럽게 보임.  
+
+**해결 코드**
+```csharp
+// Resource.cs
+private void DropItem()
+{
+    if (dropItem != null)
+    {
+        Vector3 dropPos = transform.position + Vector3.up * 0.5f;
+        Instantiate(dropItem, dropPos, Quaternion.identity);
+    }
+}
+```
+
+
+
+
+
 
 
